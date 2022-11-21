@@ -1,0 +1,77 @@
+.items{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.items h5{
+    width: 200px;
+    text-align: center;
+}
+.items span{
+    width: 40px;
+}
+
+input[type="number"]{
+    text-align: center;
+    width: 3rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance:textfield;
+}
+
+/* Animaciones extras */
+
+.transicionModal {
+    animation: transicionModal 1s;
+}
+
+@keyframes transicionModal {
+    0% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.transicionInversa {
+    animation: transicionInversa 1s;
+}
+
+@keyframes transicionInversa {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.transicionInversaFondo {
+    animation: transicionInversaFondo 1s;
+}
+
+@keyframes transicionInversaFondo {
+    0% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.modal-backdrop{
+    display:none;
+}
