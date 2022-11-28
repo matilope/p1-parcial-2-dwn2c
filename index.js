@@ -209,34 +209,3 @@ for (let i = 0; i < productos.length; i++) {
     spanCategoria.innerHTML = productos[i].categoria;
     button.innerHTML = "Agregar al carrito";
 }
-
-
-/* Boton agregar carrito  */
-let agregarCarrito = document.querySelectorAll("[data-id]");
-let productoCarrito;
-for (let i = 0; i < agregarCarrito.length; i++) {
-    agregarCarrito[i].addEventListener('click', (e) => {
-        let atributoId = e.target.getAttribute("data-id");
-        productoCarrito = new Carrito(productos[atributoId]);
-        productoCarrito.mensajeCarrito(atributoId);
-    });
-}
-
-/* Creo el html del carrito */
-Carrito.crearHTML();
-
-[document.querySelector("[data-cerrar]"), document.querySelector(".btn-close")].forEach(botones => botones.addEventListener("click", (e) => {
-    Carrito.cerrarCarrito(e);
-}));
-
-document.querySelector("i").addEventListener("click", () => {
-    Carrito.abrirCarrito();
-    Carrito.vacioProductos();
-    Carrito.mostrarProductos();
-    let decrementador = document.querySelectorAll("[data-name='decrementador']");
-    for(let i = 0; i<decrementador.length;i++){
-        decrementador[i].addEventListener("click", (e) => {
-            Carrito.decrementador(e);
-        });
-    }
-});

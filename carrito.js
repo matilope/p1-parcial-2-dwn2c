@@ -77,7 +77,7 @@ class Carrito {
     static mostrarProductos() {
         let carrito = JSON.parse(localStorage.getItem("carrito"));
         let modalBody = document.querySelector(".modal-body");
-        if(carrito){
+        if(carrito&&carrito.length>0){
             for(let i = 0; i<carrito.length;i++){
                 let div = document.createElement("div");
                 modalBody.appendChild(div);
@@ -157,10 +157,10 @@ class Carrito {
         this.producto = producto;
         let carrito = JSON.parse(localStorage.getItem("carrito"));
         if (carrito) {
-            for (let j = 0; j < carrito.length; j++) {
-                if (carrito[j].nombre == producto.nombre) {
+            for (let i = 0; i < carrito.length; i++) {
+                if (carrito[i].nombre == producto.nombre) {
                     var validador = true;
-                    var carritoIndex = j;
+                    var carritoIndex = i;
                     break;
                 }
             }
