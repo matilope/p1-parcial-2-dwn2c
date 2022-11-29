@@ -150,7 +150,7 @@ if (!localStorage.getItem("productos")) {
     localStorage.setItem("productos", JSON.stringify(data));
 }
 
-let productos = JSON.parse(localStorage.getItem("productos")).sort((a, b) => {
+export const productos = JSON.parse(localStorage.getItem("productos")).sort((a, b) => {
     return a.id - b.id;
 });
 
@@ -218,7 +218,6 @@ breadcrumb.forEach((categoria)=>{
         let filtrados = productos.filter(item => item.categoria == categoria.textContent.toLowerCase());
         let articles = crearHtmlProductos(filtrados);
         section.replaceChildren(...articles);
-        Carrito.vacioProductos();
-        Carrito.mostrarProductos();
+        Carrito.agregarProductos();
     });
 });

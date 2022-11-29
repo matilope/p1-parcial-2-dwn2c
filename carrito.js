@@ -1,3 +1,5 @@
+import { productos } from './index.js';
+export let productoCarrito;
 export class Carrito {
     
     static crearHTML() {
@@ -53,7 +55,6 @@ export class Carrito {
 
     static agregarProductos() {
         let agregarCarrito = document.querySelectorAll("[data-id]");
-        let productoCarrito;
         for (let i = 0; i < agregarCarrito.length; i++) {
             agregarCarrito[i].addEventListener('click', (e) => {
                 let atributoId = e.target.getAttribute("data-id");

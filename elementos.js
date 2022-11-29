@@ -4,7 +4,7 @@ Carrito.crearHTML();
 Carrito.mostrarProductos();
 
 /* Boton agregar carrito  */
-
+Carrito.agregarProductos();
 
 
 [document.querySelector("[data-cerrar]"), document.querySelector(".btn-close")].forEach(botones => botones.addEventListener("click", (e) => {
