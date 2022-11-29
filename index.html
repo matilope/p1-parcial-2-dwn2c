@@ -14,19 +14,31 @@
 </head>
 
 <body>
-  <header>
+
+  <header class="text-center mt-4">
     <h1>
       Programación I | Parcial 2 | LOPEZ MUÑOZ, MATIAS GABRIEL | Mi carrito
     </h1>
   </header>
+
+  <nav class="container d-flex justify-content-end my-5" aria-label="breadcrumb">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><span id="celulares">Celulares</span></li>
+      <li class="breadcrumb-item"><span id="accesorios">Accesorios</span></li>
+      <li class="breadcrumb-item"><span id="Relojes">Relojes</span></li>
+    </ul>
+  </nav>
+
   <main>
     <h2>Productos</h2>
-    <i style="font-size:40px" class="bi bi-cart2"></i>
+    <div class="d-flex justify-content-end my-3">
+      <i style="font-size:40px" class="bi bi-cart2"></i>
+    </div>
   </main>
 
-  <script src="index.js"></script>
-  <script src="carrito.js"></script>
-  <script src="elementos.js"></script>
+  <script type="module" src="carrito.js"></script>
+  <script type="module" src="index.js"></script>
+  <script type="module" src="elementos.js"></script>
   <script>
     Date.prototype.obtenerFecha = function () {
       let days = [
@@ -60,6 +72,7 @@
         `;
     };
   </script>
+
 </body>
 
 </html>

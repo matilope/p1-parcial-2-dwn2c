@@ -1,4 +1,4 @@
-class Carrito {
+export class Carrito {
     
     static crearHTML() {
         let modal = document.querySelector(".modal");
@@ -47,11 +47,23 @@ class Carrito {
             modal_body.classList.add("modal-body");
             modal_footer.classList.add("modal-footer");
             boton_cerrar.classList.add(...["btn", "btn-lg", "btn-success", "text-light"]);
-            boton_cerrar.setAttribute("data-cerrar", true);
+            boton_cerrar.setAttribute("data-cerrar", "true");
         }
     }
 
-    static abrirCarrito(){
+    static agregarProductos() {
+        let agregarCarrito = document.querySelectorAll("[data-id]");
+        let productoCarrito;
+        for (let i = 0; i < agregarCarrito.length; i++) {
+            agregarCarrito[i].addEventListener('click', (e) => {
+                let atributoId = e.target.getAttribute("data-id");
+                productoCarrito = new Carrito(productos[atributoId]);
+                productoCarrito.mensajeCarrito(atributoId);
+            });
+        }
+    }
+
+    static abrirCarrito() {
         let modalBackdrop = document.querySelector(".modal-backdrop");
         let modal = document.querySelector(".modal");
         /* Animacion */
@@ -60,7 +72,7 @@ class Carrito {
         modalBackdrop.style.display="block";
     }
 
-    static cerrarCarrito(e){
+    static cerrarCarrito(e) {
         /* Animacion */
         let padre = e.target.parentElement.parentElement.parentElement.parentElement;
         padre.previousElementSibling.classList.add("transicionInversaFondo");
@@ -82,7 +94,7 @@ class Carrito {
                 let div = document.createElement("div");
                 modalBody.appendChild(div);
                 div.classList.add(...["items"]);
-                div.setAttribute("data-id-item", i);
+                div.setAttribute("data-id-item", carrito[i].id);
                 let img = document.createElement("img");
                 let h5 = document.createElement("h5");
                 let span = document.createElement("span");
@@ -115,39 +127,67 @@ class Carrito {
         }
     }
 
-    static vacioProductos(){
+    static vacioProductos() {
         let modalBody = document.querySelector(".modal-body");
 
         document.querySelectorAll(".modal-body .items")?.forEach(e=>{
         modalBody.removeChild(e);
         });
-
+    
         document.querySelectorAll(".modal-body p")?.forEach(e=>{
             modalBody.removeChild(e);
         });
-
     }
 
-    static incrementador(e){
-
+    static incrementador() {
+        let incrementador = document.querySelectorAll("[data-name='incrementador']");
+        for(let i = 0; i<incrementador.length;i++){
+            incrementador[i].addEventListener("click", (e) => {
+                let padre = e.target.parentElement.parentElement;
+                let input = e.target.previousElementSibling;
+                let carrito = JSON.parse(localStorage.getItem("carrito")).sort((a, b)=> b.id - a.id);
+                let id = padre.getAttribute("data-id-item");
+                let filtrado = carrito.filter(item => item.id == id)[0];
+                let indexCarrito = carrito.indexOf(filtrado);
+                let producto = carrito.splice(indexCarrito, 1)[0];
+                if(producto.cantidad==10){
+                    alert("No se pueden agregar más de 10 productos");
+                } else {
+                    producto.cantidad++;
+                    input.value = producto.cantidad;
+                    carrito.push(producto);
+                    localStorage.setItem("carrito", JSON.stringify(carrito));
+                }
+            });
+        }
     }
 
-    static decrementador(e){
-        let padre = e.target.parentElement.parentElement;
-        let local = JSON.parse(localStorage.getItem("carrito"));
-        let id = padre.getAttribute("data-id-item");
-        let producto = local.splice(local[id], 1);
-        console.log(producto);
-        if(producto.cantidad>1){
-            producto.cantidad--;
-            
-        } else {
-            if(confirm("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?")){
-                let modalBody = padre.parentElement;
-                modalBody.removeChild(padre);
-            } else {
-                alert("No se ha eliminado");
-            }
+    static decrementador() {
+        let decrementador = document.querySelectorAll("[data-name='decrementador']");
+        for(let i = 0; i<decrementador.length;i++){
+            decrementador[i].addEventListener("click", (e) => {
+                let padre = e.target.parentElement.parentElement;
+                let input = e.target.nextElementSibling;
+                let carrito = JSON.parse(localStorage.getItem("carrito")).sort((a, b)=> b.id - a.id);
+                let id = padre.getAttribute("data-id-item");
+                let filtrado = carrito.filter(item => item.id == id)[0];
+                let indexCarrito = carrito.indexOf(filtrado);
+                let producto = carrito.splice(indexCarrito, 1)[0];
+                if(producto.cantidad>1){
+                    producto.cantidad--;
+                    input.value = producto.cantidad;
+                    carrito.push(producto);
+                    localStorage.setItem("carrito", JSON.stringify(carrito));
+                } else {
+                    if(confirm("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?")){
+                        let modalBody = padre.parentElement;
+                        modalBody.removeChild(padre);
+                        localStorage.setItem("carrito", JSON.stringify(carrito));
+                    } else {
+                        alert("No se ha eliminado");
+                    }
+                }
+            });
         }
     }
 
