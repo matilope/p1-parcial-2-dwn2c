@@ -3,6 +3,7 @@
 ## Alumno/s
 
 - Matias Gabriel Lopez Muñoz (@matilope)
+- Lautaro Climent (@lclob)
 
 ## Observaciones
 

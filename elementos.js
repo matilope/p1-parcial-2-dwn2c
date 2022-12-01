@@ -1,20 +1,25 @@
 import { Carrito } from './carrito.js';
 
-Carrito.crearHTML();
+let carrito = JSON.parse(localStorage.getItem("carrito"));
+
+/* Inicializo metodos estaticos para su utilizacion en caso de ser necesarios */
+Carrito.crearHTML(carrito);
 Carrito.mostrarProductos();
-
-/* Boton agregar carrito  */
 Carrito.agregarProductos();
+Carrito.actualizarCantidadProductos();
 
 
-[document.querySelector("[data-cerrar]"), document.querySelector(".btn-close")].forEach(botones => botones.addEventListener("click", (e) => {
+/* Agarro el evento cerrar */
+document.querySelector(".btn-close").addEventListener("click", (e) => {
     Carrito.cerrarCarrito(e);
-}));
+});
 
+
+/* Agarro el evento click del carrito */
+/* Aqui se despliega el carrito por lo tanto cada vez que se despliega por medio de metodos estaticos lo vacio (removeChild) y lo vuelvo a recorrer */
 
 document.querySelector("i").addEventListener("click", () => {
     Carrito.abrirCarrito();
-    Carrito.vacioProductos();
     Carrito.mostrarProductos();
     Carrito.decrementador();
     Carrito.incrementador();

@@ -1,4 +1,11 @@
 
+.cantidad-productos{
+    position: absolute;
+    top: -30%;
+    left: 40%;
+    font-size: 2rem;
+}
+
 
 .items{
     display: flex;
