@@ -286,10 +286,6 @@ export class Carrito {
         }, 2000);
     }
 
-    montoTotal(){
-        let carrito = JSON.parse(localStorage.getItem("carrito"));
-    }
-
     eliminarItem(i) {
     }
 

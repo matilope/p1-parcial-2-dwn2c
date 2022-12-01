@@ -101,6 +101,24 @@ input[type=number] {
 
 
 
+/* Modal producto */
+
+.articulo-modal{
+    position: fixed !important;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 2rem;
+    margin: 1rem auto !important;
+    width: 24rem;
+}
+
+.imagenes-pequeñas{
+    display: inline;
+    width: 20%;
+    cursor:pointer;
+}
 
 
 
