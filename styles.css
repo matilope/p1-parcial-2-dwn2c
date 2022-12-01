@@ -1,4 +1,6 @@
 
+/* Carrito de compras cantidad */
+
 .cantidad-productos{
     position: absolute;
     top: -30%;
@@ -6,6 +8,8 @@
     font-size: 2rem;
 }
 
+
+/* Items del carrito */
 
 .items{
     display: flex;
@@ -37,10 +41,14 @@ input[type=number] {
     -moz-appearance:textfield;
 }
 
+
+/* Categoria en estado activo */
+
 .categoria{
     font-weight: bold;
     color:blue;
 }
+
 
 /* Animaciones extras */
 

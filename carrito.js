@@ -148,6 +148,8 @@ export class Carrito {
             carrito.sort((a, b) => b.id - a.id);
             let carritoActualizado = this.crearHTML(carrito);
             modal_body.replaceChildren(...carritoActualizado);
+            this.incrementador();
+            this.decrementador();
         } else {
             let p = document.createElement("p");
             p.textContent = "No hay productos agregados al carrito";
@@ -159,9 +161,7 @@ export class Carrito {
         let incrementador = document.querySelectorAll("[data-name='incrementador']");
         for (let i = 0; i < incrementador.length; i++) {
             incrementador[i].addEventListener("click", (e) => {
-                let padre = e.target.parentElement.parentElement;
-                let input = e.target.previousElementSibling;
-                let spanPrecio = e.target.parentElement.previousElementSibling;
+                let padre = e?.target?.parentElement.parentElement;
                 let carrito = JSON.parse(localStorage.getItem("carrito")).sort((a, b) => b.id - a.id);
                 let id = padre.getAttribute("data-id-item");
                 let filtrado = carrito.filter(item => item.id == id)[0];
@@ -172,12 +172,11 @@ export class Carrito {
                     alert("No se pueden agregar más de 10 productos");
                 } else {
                     producto.cantidad++;
-                    input.value = producto.cantidad;
                     producto.precio += precio;
-                    spanPrecio.textContent = `${producto.precio}`;
                     carrito.push(producto);
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 }
+                this.mostrarProductos();
             });
         }
     }
@@ -187,9 +186,7 @@ export class Carrito {
         let decrementador = document.querySelectorAll("[data-name='decrementador']");
         for (let i = 0; i < decrementador.length; i++) {
             decrementador[i].addEventListener("click", (e) => {
-                let padre = e.target.parentElement.parentElement;
-                let input = e.target.nextElementSibling;
-                let spanPrecio = e.target.parentElement.previousElementSibling;
+                let padre = e?.target?.parentElement.parentElement;
                 let id = padre.getAttribute("data-id-item");
                 let filtrado = carrito.filter(item => item.id == id)[0];
                 let indexCarrito = carrito.indexOf(filtrado);
@@ -197,21 +194,19 @@ export class Carrito {
                 let precio = producto.precio/producto.cantidad;
                 if (producto.cantidad > 1) {
                     producto.cantidad--;
-                    input.value = producto.cantidad;
                     producto.precio -= precio;
-                    spanPrecio.textContent = `${producto.precio}`;
                     carrito.push(producto);
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 } else {
                     if (confirm("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?")) {
-                        let modalBody = padre.parentElement;
-                        modalBody.removeChild(padre);
+                        padre.remove();
                         localStorage.setItem("carrito", JSON.stringify(carrito));
                         this.actualizarCantidadProductos();
                     } else {
                         alert("No se ha eliminado");
                     }
                 }
+                this.mostrarProductos();
             });
         }
     }

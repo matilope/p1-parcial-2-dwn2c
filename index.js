@@ -195,7 +195,7 @@ function crearHtmlProductos(productos){
         div.classList.add(["card-body"]);
         h3.classList.add(["card-title"]);
         p.classList.add(["card-text"]);
-        button.classList.add(...["btn", "btn-primary"]);
+        button.classList.add(...["btn", "btn-lg", "btn-primary"]);
         button.setAttribute("data-id", `${productos[i].id}`);
 
         h3.innerHTML = productos[i].nombre;
@@ -221,3 +221,37 @@ breadcrumb.forEach((categoria)=>{
         Carrito.agregarProductos();
     });
 });
+
+function crearModal(){
+    let article = document.createElement("article");
+    let div = document.createElement("div");
+    let h3 = document.createElement("h3");
+    let p = document.createElement("p");
+    let spanPrecio = document.createElement("span");
+    let spanCategoria = document.createElement("span");
+    let button = document.createElement("button");
+    
+    document.body.appendChild(article);
+    article.appendChild(div);
+    div.appendChild(h3);
+    div.appendChild(p);
+    div.appendChild(spanPrecio);
+    div.appendChild(spanCategoria);
+    div.appendChild(button);
+
+    article.classList.add(...["card", "m-3"]);
+    article.style.width = "40rem";
+    div.classList.add(["card-body"]);
+    h3.classList.add(["card-title"]);
+    p.classList.add(["card-text"]);
+    button.classList.add(...["btn", "btn-lg", "btn-primary"]);
+    button.setAttribute("data-id", `${e.target.childElement}`); // hijo y las child .getAttribute(data-id);
+}
+
+let articles = document.querySelectorAll("articles");
+
+articles.forEach(article =>{
+    article.addEventListener('click', (e)=>{
+        
+    });
+})
