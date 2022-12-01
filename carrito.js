@@ -4,9 +4,11 @@ export class Carrito {
     static crearHTML(carrito) {
         let modal = document.querySelector(".modal");
         let fondoModal = document.querySelector(".modal-backdrop");
-        let modal_bodySelector = document.querySelector(".modal-body");
+        let modalSelector = document.querySelector(".modal-body");
         let itemsSelector = document.querySelectorAll(".modal-body *");
+        let footerAll = document.querySelectorAll(".modal-footer *");
         itemsSelector.forEach(item=> item.remove());
+        footerAll.forEach(item=> item.remove());
 
         if (!modal && !fondoModal) {
             /* Fondo modal */
@@ -16,86 +18,84 @@ export class Carrito {
 
             /* Creacion de elementos para el modal */
             let modal = document.createElement("div");
-            let modal_dialog = document.createElement("div");
-            let modal_content = document.createElement("div");
-            let modal_header = document.createElement("div");
+            let modalDialog = document.createElement("div");
+            let modalContent = document.createElement("div");
+            let modalHeader = document.createElement("div");
             let h4 = document.createElement("h4");
             let boton = document.createElement("button");
-            let modal_body = document.createElement("div");
-            let modal_footer = document.createElement("div");
-            let boton_continuar = document.createElement("button");
+            let modalBody = document.createElement("div");
+            let modalFooter = document.createElement("div");
 
             /* Appends */
             document.body.appendChild(modal);
-            modal.appendChild(modal_dialog);
-            modal_dialog.appendChild(modal_content);
-            modal_content.appendChild(modal_header);
-            modal_content.appendChild(modal_body);
-            modal_content.appendChild(modal_footer);
-            modal_header.appendChild(h4);
-            modal_header.appendChild(boton);
-            modal_footer.appendChild(boton_continuar);
+            modal.appendChild(modalDialog);
+            modalDialog.appendChild(modalContent);
+            modalContent.append(modalHeader, modalBody, modalFooter);
+            modalHeader.append(h4, boton);
 
             /* Informacion */
-            h4.innerHTML = "Carrito";
-            boton_continuar.innerHTML = "Continuar";
+            h4.textContent = "Carrito";
 
             /* Se agregan las clases y atributos de Bootstrap */
             modal.classList.add("modal");
             modal.id = "exampleModalScrollable";
-            modal_dialog.classList.add(...["modal-dialog", "modal-dialog-scrollable"]);
-            modal_content.classList.add(...["modal-content", "bg-customize"]);
-            modal_header.classList.add("modal-header");
+            modalDialog.classList.add(...["modal-dialog", "modal-dialog-scrollable"]);
+            modalContent.classList.add(...["modal-content", "bg-customize"]);
+            modalHeader.classList.add("modal-header");
             h4.classList.add(...["modal-title", "text-center"]);
             boton.classList.add("btn-close");
             boton.setAttribute("type", "button");
-            modal_body.classList.add("modal-body");
-            modal_footer.classList.add("modal-footer");
-            boton_continuar.classList.add(...["btn", "btn-lg", "btn-success", "text-light"]);
-            boton_continuar.setAttribute("data-continuar", "true");
+            modalBody.classList.add("modal-body");
+            modalFooter.classList.add("modal-footer");
+
         } else if (carrito && carrito.length > 0){
             let precioTotal = 0;
             let separador = document.createElement("hr");
             let precio = document.createElement("span");
+            let botonContinuar = document.createElement("button");
+            let botonEliminar = document.createElement("button");
+            let modalFooter = document.querySelector(".modal-footer");
+            modalFooter.append(botonEliminar, botonContinuar);
+            botonContinuar.textContent = "Continuar";
+            botonEliminar.textContent = "Vaciar carrito";
+            botonContinuar.classList.add(...["btn", "btn-lg", "btn-success", "text-light"]);
+            botonContinuar.setAttribute("data-continuar", "true");
+            botonEliminar.classList.add(...["btn", "btn-lg", "btn-danger", "text-light"]);
 
             carrito.forEach(item =>{
                 let div = document.createElement("div");
-                modal_bodySelector.appendChild(div);
-                div.classList.add(...["items"]);
+                modalSelector.appendChild(div);
+                div.classList.add(...["items", "gap-3", "mb-5"]);
                 div.setAttribute("data-id-item", item.id);
                 let img = document.createElement("img");
-                let h5 = document.createElement("h5");
+                let h4 = document.createElement("h4");
                 let span = document.createElement("span");
                 let divContenedorInput = document.createElement("div");
                 let decrementador = document.createElement("button");
                 let input = document.createElement("input");
                 let incrementador = document.createElement("button");
-                div.appendChild(img);
-                div.appendChild(h5);
-                div.appendChild(span);
-                div.appendChild(divContenedorInput);
-                divContenedorInput.appendChild(decrementador);
-                divContenedorInput.appendChild(input);
-                divContenedorInput.appendChild(incrementador);
+                let eliminarItem = document.createElement("i");
+                div.append(img, h4, span, divContenedorInput, eliminarItem);
+                divContenedorInput.append(decrementador, input, incrementador);
                 decrementador.setAttribute("data-name", "decrementador");
                 incrementador.setAttribute("data-name", "incrementador");
+                eliminarItem.classList.add(...["bi", "bi-trash2", "trash"]);
                 decrementador.textContent = "-";
                 incrementador.textContent = "+";
-                img.style = "width:20%";
-                h5.textContent = item.nombre;
+                img.style = "width:16%";
+                h4.textContent = item.nombre;
                 img.src = item.imagenes[0];
                 span.textContent = item.precio;
                 input.value = item.cantidad;
                 input.type = "number";
                 precioTotal+=item.precio;   
             });
-            modal_bodySelector.appendChild(separador);
-            modal_bodySelector.appendChild(precio);
+            modalSelector.append(separador, precio);
             precio.textContent = `Precio total: ${precioTotal}`;
         }
 
-        if(modal_bodySelector!=null){
-            let items = modal_bodySelector.childNodes;
+        if(modalSelector!=null){
+            let items = modalSelector.childNodes;
             return items;
         }
     }
@@ -142,18 +142,31 @@ export class Carrito {
 
     static mostrarProductos() {
         let carrito = JSON.parse(localStorage.getItem("carrito"));
-        let modal_body = document.querySelector(".modal-body");
+        let modalBody = document.querySelector(".modal-body");
+        let modalFooter = document.querySelector(".modal-footer");
+        let vaciarProducto = document.querySelector(".btn-danger");
+        let continuar = document.querySelector("[data-continuar]");
         if(carrito&&carrito.length>0){
             carrito.sort((a, b) => b.id - a.id);
             let carritoActualizado = this.crearHTML(carrito);
-            modal_body.replaceChildren(...carritoActualizado);
+            modalBody.replaceChildren(...carritoActualizado);
             this.incrementador();
             this.decrementador();
+            this.eliminarItem();
+            this.vaciarCarrito();
+            if(vaciarProducto){
+                vaciarProducto.style="display:block;";
+            }
+            modalFooter.style="justify-content:space-between;";
         } else {
             let p = document.createElement("p");
             p.textContent = "No hay productos agregados al carrito";
-            modal_body?.replaceChildren(p);
+            modalBody?.replaceChildren(p);
+            vaciarProducto.style="display:none;";
+            modalFooter.style="justify-content:flex-end;";
+            continuar.disabled=true;
         }
+        this.actualizarCantidadProductos();
     }
 
     static incrementador() {
@@ -200,7 +213,6 @@ export class Carrito {
                     if (confirm("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?")) {
                         padre.remove();
                         localStorage.setItem("carrito", JSON.stringify(carrito));
-                        this.actualizarCantidadProductos();
                     } else {
                         alert("No se ha eliminado");
                     }
@@ -286,7 +298,37 @@ export class Carrito {
         }, 2000);
     }
 
-    eliminarItem(i) {
+    static eliminarItem() {
+        let carrito = JSON.parse(localStorage.getItem("carrito"))?.sort((a, b) => b.id - a.id);
+        let eliminar = document.querySelectorAll(".bi-trash2");
+        eliminar.forEach(itemEliminado => {
+            itemEliminado.addEventListener('click', (e) => {
+                let padre = e?.target?.parentElement;
+                let id = padre.getAttribute("data-id-item");
+                let filtrado = carrito.filter(item => item.id == id)[0];
+                let indexCarrito = carrito.indexOf(filtrado);
+                let producto = carrito.splice(indexCarrito, 1)[0];
+                if (confirm("¿Estas seguro de que quieres eliminarlo?")) {
+                    padre.remove();
+                    localStorage.setItem("carrito", JSON.stringify(carrito));
+                }  else {
+                    alert(`No se ha eliminado el producto ${producto.nombre}`);
+                }
+                this.mostrarProductos();
+            });
+        });
+    }
+
+    static vaciarCarrito() {
+        let vaciar = document.querySelector(".btn-danger");
+        vaciar?.addEventListener('click', () => {
+            if (confirm("¿Estas seguro de que quieres vaciar el carrito?")) {
+                localStorage.removeItem("carrito");
+            }  else {
+                alert(`No se ha vaciado el carrito`);
+            }
+            this.mostrarProductos();
+        });
     }
 
 

@@ -17,7 +17,7 @@ document.querySelector(".btn-close").addEventListener("click", (e) => {
 /* Agarro el evento click del carrito */
 /* Aqui se despliega el carrito por lo tanto cada vez que se despliega por medio de metodos estaticos lo vacio (remove) y lo vuelvo a recorrer */
 
-document.querySelector("i").addEventListener("click", () => {
+document.querySelector(".bi-cart2").addEventListener("click", () => {
     Carrito.abrirCarrito();
     Carrito.mostrarProductos();
 });

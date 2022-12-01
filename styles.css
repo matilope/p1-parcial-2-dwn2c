@@ -11,12 +11,16 @@
 
 /* Items del carrito */
 
+.modal-content{
+    width: 600px;
+}
+
 .items{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.items h5{
+.items h4{
     width: 200px;
     text-align: center;
 }
@@ -39,8 +43,27 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     appearance: textfield;
     -moz-appearance:textfield;
+    border:1px solid rgb(207, 207, 207);
+    height: 30px;
 }
 
+button[data-name="decrementador"], button[data-name="incrementador"]{
+    width: 30px;
+    height: 30px;
+    background-color: #198754;
+    color:white;
+    border:none;
+}
+
+.trash{
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.trash:hover{
+    cursor: pointer;
+}
 
 /* Categoria en estado activo */
 
