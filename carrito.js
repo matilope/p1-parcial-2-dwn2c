@@ -114,7 +114,7 @@ export class Carrito {
 
     static actualizarCantidadProductos(){
         let cantidadProductos = document.querySelector(".cantidad-productos");
-        cantidadProductos.textContent = JSON.parse(localStorage.getItem("carrito"))?.length;
+        cantidadProductos.textContent = JSON.parse(localStorage.getItem("carrito"))?.length | 0;
     }
 
     static abrirCarrito() {
