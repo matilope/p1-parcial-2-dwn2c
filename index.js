@@ -222,7 +222,12 @@ breadcrumb.forEach((categoria)=>{
     });
 });
 
-function crearModal(){
+function crearModalProducto(filtrado){
+    let fondoModal = document.createElement("div");
+    fondoModal.classList.add(...["modal-backdrop", "fade", "show"]);
+    fondoModal.style="display: block; z-index:1;";
+    document.body.appendChild(fondoModal);
+
     let article = document.createElement("article");
     let div = document.createElement("div");
     let h3 = document.createElement("h3");
@@ -230,8 +235,23 @@ function crearModal(){
     let spanPrecio = document.createElement("span");
     let spanCategoria = document.createElement("span");
     let button = document.createElement("button");
-    
+    let modal_header = document.createElement("div");
+    let boton_cerrar = document.createElement("button");
+
     document.body.appendChild(article);
+    article.appendChild(modal_header);
+    modal_header.appendChild(boton_cerrar);
+
+    for (let i = 0; i < filtrado.imagenes.length; i++) {
+        let imagen = document.createElement("img");
+        imagen.classList.add(["card-img-top"])
+        article.appendChild(imagen);
+        imagen.src = filtrado.imagenes[i];
+        if (i !== 0) {
+            imagen.style.display = "none";
+        }
+    }
+    
     article.appendChild(div);
     div.appendChild(h3);
     div.appendChild(p);
@@ -240,18 +260,39 @@ function crearModal(){
     div.appendChild(button);
 
     article.classList.add(...["card", "m-3"]);
-    article.style.width = "40rem";
-    div.classList.add(["card-body"]);
-    h3.classList.add(["card-title"]);
-    p.classList.add(["card-text"]);
+    article.style="position:fixed; z-index:2; top:0; left:0; right:0; bottom:0; margin: 2rem auto !important; padding: 2rem;";
+    article.style.width = "24rem";
+    div.classList.add(...["card-body"]);
+    h3.classList.add(...["card-title"]);
+    p.classList.add(...["card-text"]);
     button.classList.add(...["btn", "btn-lg", "btn-primary"]);
-    button.setAttribute("data-id", `${e.target.childElement}`); // hijo y las child .getAttribute(data-id);
+    button.setAttribute("data-id", `${filtrado.id}`);
+    boton_cerrar.classList.add(...["btn-close"]);
+    modal_header.classList.add(...["modal-header"]);
+
+    h3.innerHTML = filtrado.nombre;
+    p.innerHTML = filtrado.descripcion;
+    spanPrecio.innerHTML = filtrado.precio;
+    spanCategoria.innerHTML = filtrado.categoria;
+    button.innerHTML = "Agregar al carrito";
+
+    /* Evento cerrar */
+    [fondoModal, boton_cerrar].forEach(cerrar => {
+        cerrar.addEventListener('click', () => {
+            document.body.removeChild(article);
+            document.body.removeChild(fondoModal);
+        });
+    });
 }
 
-let articles = document.querySelectorAll("articles");
-
+let articles = document.querySelectorAll("img");
 articles.forEach(article =>{
     article.addEventListener('click', (e)=>{
-        
+        let padre = e.target.parentElement;
+        let children = padre.children;
+        let id = children[children.length-1].children[children[children.length-1].children.length-1].getAttribute("data-id");
+        let filtrado = productos.filter(item => item.id == id)[0];
+        crearModalProducto(filtrado);
+        Carrito.agregarProductos();
     });
 })

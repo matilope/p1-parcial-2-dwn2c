@@ -7,7 +7,6 @@ export class Carrito {
         let modal_bodySelector = document.querySelector(".modal-body");
         let itemsSelector = document.querySelectorAll(".modal-body *");
         itemsSelector.forEach(item=> item.remove());
-        let items;
 
         if (!modal && !fondoModal) {
             /* Fondo modal */
@@ -96,9 +95,9 @@ export class Carrito {
         }
 
         if(modal_bodySelector!=null){
-            items = modal_bodySelector.childNodes;
+            let items = modal_bodySelector.childNodes;
+            return items;
         }
-        return items;
     }
 
     static agregarProductos() {
