@@ -232,7 +232,6 @@ button[data-name="decrementador"], button[data-name="incrementador"]{
 }
 
 
-
 /* Modal general */
 
 .modal-backdrop{
@@ -283,7 +282,6 @@ button[data-name="decrementador"], button[data-name="incrementador"]{
     font-size: 26px;
     color: #b60dfd;
 }
-
 
 
 /* Alerta personalizado */
