@@ -32,6 +32,23 @@ section article span:last-of-type{
     text-transform: capitalize;
 }
 
+.inicio-precio{
+    font-size: 20px;
+    color: #b60dfd;
+    margin-bottom: 1rem;
+}
+
+.cut-text{
+    display: -webkit-box;
+    height: 81px;
+    -webkit-line-clamp: 4; /* Número de líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+    margin:1rem 0;
+}
+
 /* Carrito de compras cantidad mostrado en inicio */
 
 .cantidad-productos{

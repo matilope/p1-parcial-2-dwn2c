@@ -49,7 +49,7 @@ const data = [{
         id: 5
     },
     {
-        nombre: "Auriculares con cable",
+        nombre: "Airpods con cable",
         imagenes: ["/imagenes/accesorios/accesorios-auriculares-cable.webp"],
         descripcion: "A diferencia de los audífonos circulares tradicionales, el diseño de los EarPods se basa en la geometría del oído, por eso son más cómodos que cualquier otro audífono de este tipo.",
         precio: 14255,
@@ -57,7 +57,7 @@ const data = [{
         id: 6
     },
     {
-        nombre: "Auriculares inalambricos",
+        nombre: "Airpods inalambricos",
         imagenes: ["/imagenes/accesorios/accesorios-auriculares-inalambricos.webp"],
         descripcion: "Los AirPods te brindan una experiencia inalámbrica inigualable con un sonido de alta calidad, acceso a Siri y un estuche de carga que te ofrece más de 24 horas de reproducción de audio",
         precio: 24131,
@@ -164,9 +164,9 @@ function crearHtmlProductos(productos){
         let article = document.createElement("article");
         let div = document.createElement("div");
         let h3 = document.createElement("h3");
+        let spanCategoria = document.createElement("span");
         let p = document.createElement("p");
         let spanPrecio = document.createElement("span");
-        let spanCategoria = document.createElement("span");
         let button = document.createElement("button");
         let imagen = document.createElement("img");
 
@@ -176,15 +176,16 @@ function crearHtmlProductos(productos){
         imagen.src = productos[i].imagenes[0];
         article.append(imagen, div);
 
-        div.append(h3, p, spanPrecio, spanCategoria, button);
+        div.append(h3, spanCategoria, p, spanPrecio, button);
 
         main.classList.add(...["container"]);
         section.classList.add(...["row", "justify-content-center"]);
-        article.classList.add(...["card", "m-3", "col-lg-4", "col-md-6", "col-sm-12"]);
-        article.style.width = "18rem";
+        article.classList.add(...["card", "m-3",  "col-lg-4", "col-md-6", "col-sm-12"]);
+        article.style.width = "25rem";
         div.classList.add(...["card-body"]);
         h3.classList.add(...["card-title"]);
-        p.classList.add(...["card-text"]);
+        p.classList.add(...["card-text", "cut-text"]);
+        spanPrecio.classList.add(...["inicio-precio"]);
         button.classList.add(...["btn", "btn-lg", "btn-primary"]);
         button.setAttribute("data-id", `${productos[i].id}`);
 
