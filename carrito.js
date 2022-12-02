@@ -88,7 +88,11 @@ export class Carrito{
                 precioTotal+=item.precio;   
             });
             modalSelector.append(separador, precio);
-            precio.textContent = `Precio total: $${precioTotal}`;
+            precio.classList.add("precio-total");
+            precio.textContent = `Precio total: `;
+            let spanPrecioTotal = document.createElement("span");
+            precio.appendChild(spanPrecioTotal);
+            spanPrecioTotal.textContent = `$${precioTotal}`;
         }
 
         /* Creo el boton de continuar */
@@ -221,7 +225,7 @@ export class Carrito{
                     carrito.push(producto);
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 } else {
-                    if (this.alerta("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?", true, function(confirm){
+                    if (this.alerta("No puede tener menos de un item,<br /> ¿Estas seguro de que quieres eliminarlo?", true, function(confirm){
                         if(confirm){
                             padre.remove();
                             localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -297,9 +301,9 @@ export class Carrito{
             modal.style="display:none";
 
             botonAceptar.classList.add(...["bg-success", "border", "rounded", "p-2", "text-white"]);
-            p.style="font-size:18px;";
+            p.style="font-size:18px; text-align:center;";
 
-            p.textContent = texto;
+            p.innerHTML = texto;
             botonAceptar.textContent = "Aceptar";
 
             if(confirmacion){

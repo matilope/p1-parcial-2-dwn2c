@@ -165,6 +165,16 @@ button[data-name="decrementador"], button[data-name="incrementador"]{
     cursor: pointer;
 }
 
+.precio-total{
+    font-size:26px;
+}
+
+.precio-total span{
+    color:#b60dfd;
+    font-size: 28px;
+}
+
+
 /* Categoria en estado activo */
 
 .categoria{
