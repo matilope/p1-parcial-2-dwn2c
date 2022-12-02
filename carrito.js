@@ -247,10 +247,14 @@ export class Carrito{
                 let filtrado = carrito.filter(item => item.id == id)[0];
                 let indexCarrito = carrito.indexOf(filtrado);
                 let producto = carrito.splice(indexCarrito, 1)[0];
-                if (confirm("¿Estas seguro de que quieres eliminarlo?")) {
-                    padre.remove();
-                    localStorage.setItem("carrito", JSON.stringify(carrito));
-                }  else {
+                if (this.alerta("¿Estas seguro de que quieres eliminarlo?", true, function(confirm){
+                    if(confirm){
+                        padre.remove();
+                        localStorage.setItem("carrito", JSON.stringify(carrito));
+                        Carrito.mostrarProductos();
+                    }
+                })) {
+                } else {
                     this.alerta(`No se ha eliminado el producto ${producto.nombre}`);
                 }
                 this.mostrarProductos();
@@ -261,9 +265,13 @@ export class Carrito{
     static vaciarCarrito() {
         let vaciar = document.querySelector(".btn-danger");
         vaciar?.addEventListener('click', () => {
-            if (confirm("¿Estas seguro de que quieres vaciar el carrito?")) {
-                localStorage.removeItem("carrito");
-            }  else {
+            if (this.alerta("¿Estas seguro de que quieres vaciar el carrito?", true, function(confirm){
+                if(confirm){
+                    localStorage.removeItem("carrito");
+                    Carrito.mostrarProductos();
+                }
+            })) {
+            } else {
                 this.alerta(`No se ha vaciado el carrito`);
             }
             this.mostrarProductos();
