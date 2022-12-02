@@ -1,7 +1,7 @@
 # Programacion I - Parcial II
 
 ## URL
-- [Sitio subido a github pages](https://matilope.github.io/p1-parcial-2-dwn2c?target=_blank).
+- [Sitio subido a github pages](https://matilope.github.io/p1-parcial-2-dwn2c).
 
 ## Alumno/s
 
