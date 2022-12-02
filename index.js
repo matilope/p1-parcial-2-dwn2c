@@ -105,7 +105,7 @@ const data = [{
         id: 12
     },
     {
-        nombre: "Apple watch series 8",
+        nombre: "Apple watch 8",
         imagenes: ["/imagenes/watches/watch-8-azul.webp"],
         descripcion: "El Apple Watch Series 8 viene con apps y sensores de salud avanzados con los que puedes hacerte un electrocardiograma, medir tu frecuencia cardiaca y nivel de oxígeno en la sangre, y registrar cambios de temperatura.",
         precio: 180999,
@@ -113,7 +113,7 @@ const data = [{
         id: 13
     },
     {
-        nombre: "Apple watch series 7",
+        nombre: "Apple watch 7",
         imagenes: ["/imagenes/watches/watch-7-blanco.webp"],
         descripcion: "El Apple Watch Series 7 tiene la pantalla Retina siempre activa más grande y avanzada hasta ahora. Sus funcionalidades avanzadas te permiten medir tu nivel de oxígeno en la sangre, monitorear tus horas de sueño y practicar la conciencia plena.",
         precio: 170199,
@@ -121,7 +121,7 @@ const data = [{
         id: 14
     },
     {
-        nombre: "Apple watch series 6",
+        nombre: "Apple watch 6",
         imagenes: ["/imagenes/watches/watch-6-rojo.webp"],
         descripcion: "Con el Apple Watch Series 6, puedes medir tu nivel de oxígeno en la sangre gracias a un sensor revolucionarios. Además, tienes los datos de tus entrenamientos a la vista en la mejorada pantalla Retina, que ahora es 2.5 veces más brillante.",
         precio: 125890,
@@ -129,7 +129,7 @@ const data = [{
         id: 15
     },
     {
-        nombre: "Apple watch series 3",
+        nombre: "Apple watch 3",
         imagenes: ["/imagenes/watches/watch-3-blanco.webp"],
         descripcion: "Monitorea tu frecuencia cardiaca y recibe notificaciones si está demasiado baja o demasiado alta. Mide tus entrenamientos, lleva un registro de tu actividad y compártela. Además, recibe llamadas, responde mensajes.",
         precio: 75873,
@@ -137,7 +137,7 @@ const data = [{
         id: 16
     },
     {
-        nombre: "Apple watch series SE",
+        nombre: "Apple watch SE",
         imagenes: ["/imagenes/watches/watch-se-blanco.webp"],
         descripcion: "Tiene las funcionalidades esenciales para ayudarte a llevar una vida más activa, saludable y conectada. El Apple Watch SE es dos veces más rápido y tiene una pantalla un 30% más grande. Y cuenta con funcionalidades de seguridad como Detección de Caídas y Emergencia SOS.",
         precio: 129999,
