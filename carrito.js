@@ -52,14 +52,10 @@ export class Carrito {
             let precioTotal = 0;
             let separador = document.createElement("hr");
             let precio = document.createElement("span");
-            let botonContinuar = document.createElement("button");
             let botonEliminar = document.createElement("button");
             let modalFooter = document.querySelector(".modal-footer");
-            modalFooter.append(botonEliminar, botonContinuar);
-            botonContinuar.textContent = "Continuar";
+            modalFooter.append(botonEliminar);
             botonEliminar.textContent = "Vaciar carrito";
-            botonContinuar.classList.add(...["btn", "btn-lg", "btn-success", "text-light"]);
-            botonContinuar.setAttribute("data-continuar", "true");
             botonEliminar.classList.add(...["btn", "btn-lg", "btn-danger", "text-light"]);
 
             carrito.forEach(item =>{
@@ -85,15 +81,23 @@ export class Carrito {
                 img.style = "width:16%";
                 h4.textContent = item.nombre;
                 img.src = item.imagenes[0];
-                span.textContent = item.precio;
+                span.textContent = `$${item.precio}`;
                 input.value = item.cantidad;
                 input.type = "number";
                 precioTotal+=item.precio;   
             });
             modalSelector.append(separador, precio);
-            precio.textContent = `Precio total: ${precioTotal}`;
+            precio.textContent = `Precio total: $${precioTotal}`;
         }
 
+        /* Creo el boton de continuar */
+        let modalFooter = document.querySelector(".modal-footer");
+        let botonContinuar = document.createElement("button");
+        modalFooter.append(botonContinuar);
+        botonContinuar.textContent = "Continuar";
+        botonContinuar.classList.add(...["btn", "btn-lg", "btn-success", "text-light"]);
+        botonContinuar.setAttribute("data-continuar", "true");
+        
         if(modalSelector!=null){
             let items = modalSelector.childNodes;
             return items;
@@ -157,14 +161,17 @@ export class Carrito {
             if(vaciarProducto){
                 vaciarProducto.style="display:block;";
             }
+            continuar.disabled = false;
             modalFooter.style="justify-content:space-between;";
         } else {
             let p = document.createElement("p");
             p.textContent = "No hay productos agregados al carrito";
             modalBody?.replaceChildren(p);
-            vaciarProducto.style="display:none;";
-            modalFooter.style="justify-content:flex-end;";
+            if(vaciarProducto){
+                vaciarProducto.style="display:none;";
+            }
             continuar.disabled=true;
+            modalFooter.style="justify-content:flex-end;";
         }
         this.actualizarCantidadProductos();
     }
@@ -220,6 +227,39 @@ export class Carrito {
                 this.mostrarProductos();
             });
         }
+    }
+
+    static eliminarItem() {
+        let carrito = JSON.parse(localStorage.getItem("carrito"))?.sort((a, b) => b.id - a.id);
+        let eliminar = document.querySelectorAll(".bi-trash2");
+        eliminar.forEach(itemEliminado => {
+            itemEliminado.addEventListener('click', (e) => {
+                let padre = e?.target?.parentElement;
+                let id = padre.getAttribute("data-id-item");
+                let filtrado = carrito.filter(item => item.id == id)[0];
+                let indexCarrito = carrito.indexOf(filtrado);
+                let producto = carrito.splice(indexCarrito, 1)[0];
+                if (confirm("¿Estas seguro de que quieres eliminarlo?")) {
+                    padre.remove();
+                    localStorage.setItem("carrito", JSON.stringify(carrito));
+                }  else {
+                    alert(`No se ha eliminado el producto ${producto.nombre}`);
+                }
+                this.mostrarProductos();
+            });
+        });
+    }
+
+    static vaciarCarrito() {
+        let vaciar = document.querySelector(".btn-danger");
+        vaciar?.addEventListener('click', () => {
+            if (confirm("¿Estas seguro de que quieres vaciar el carrito?")) {
+                localStorage.removeItem("carrito");
+            }  else {
+                alert(`No se ha vaciado el carrito`);
+            }
+            this.mostrarProductos();
+        });
     }
 
     producto;
@@ -297,39 +337,5 @@ export class Carrito {
             document.body.removeChild(toast);
         }, 2000);
     }
-
-    static eliminarItem() {
-        let carrito = JSON.parse(localStorage.getItem("carrito"))?.sort((a, b) => b.id - a.id);
-        let eliminar = document.querySelectorAll(".bi-trash2");
-        eliminar.forEach(itemEliminado => {
-            itemEliminado.addEventListener('click', (e) => {
-                let padre = e?.target?.parentElement;
-                let id = padre.getAttribute("data-id-item");
-                let filtrado = carrito.filter(item => item.id == id)[0];
-                let indexCarrito = carrito.indexOf(filtrado);
-                let producto = carrito.splice(indexCarrito, 1)[0];
-                if (confirm("¿Estas seguro de que quieres eliminarlo?")) {
-                    padre.remove();
-                    localStorage.setItem("carrito", JSON.stringify(carrito));
-                }  else {
-                    alert(`No se ha eliminado el producto ${producto.nombre}`);
-                }
-                this.mostrarProductos();
-            });
-        });
-    }
-
-    static vaciarCarrito() {
-        let vaciar = document.querySelector(".btn-danger");
-        vaciar?.addEventListener('click', () => {
-            if (confirm("¿Estas seguro de que quieres vaciar el carrito?")) {
-                localStorage.removeItem("carrito");
-            }  else {
-                alert(`No se ha vaciado el carrito`);
-            }
-            this.mostrarProductos();
-        });
-    }
-
 
 }
