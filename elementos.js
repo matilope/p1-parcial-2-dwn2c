@@ -21,3 +21,5 @@ document.querySelector(".bi-cart2").addEventListener("click", () => {
     Carrito.abrirCarrito();
     Carrito.mostrarProductos();
 });
+
+console.log(Carrito.alerta("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?", true))

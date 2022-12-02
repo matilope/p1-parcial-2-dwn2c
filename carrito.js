@@ -1,5 +1,5 @@
 import { productos } from './index.js';
-export class Carrito {
+export class Carrito{
 
     static crearHTML(carrito) {
         let modal = document.querySelector(".modal");
@@ -111,7 +111,10 @@ export class Carrito {
             agregarCarrito[i].addEventListener('click', (e) => {
                 let atributoId = e.target.getAttribute("data-id");
                 let productoCarrito = new Carrito(productos[atributoId]);
-                productoCarrito.mensajeCarrito(atributoId);
+                let filtrado = JSON.parse(localStorage.getItem("carrito")).filter(item => item.id == atributoId)[0];
+                if(filtrado.cantidad<10){
+                    productoCarrito.mensajeCarrito(atributoId);
+                }
                 this.actualizarCantidadProductos();
             });
         }
@@ -189,7 +192,7 @@ export class Carrito {
                 let producto = carrito.splice(indexCarrito, 1)[0];
                 let precio = producto.precio/producto.cantidad;
                 if (producto.cantidad == 10) {
-                    alert("No se pueden agregar más de 10 productos");
+                    this.alerta("No se pueden agregar más de 10 productos");
                 } else {
                     producto.cantidad++;
                     producto.precio += precio;
@@ -218,11 +221,11 @@ export class Carrito {
                     carrito.push(producto);
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 } else {
-                    if (confirm("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?")) {
+                    if (this.alerta("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?", true)) {
                         padre.remove();
                         localStorage.setItem("carrito", JSON.stringify(carrito));
                     } else {
-                        alert("No se ha eliminado");
+                        this.alerta("El producto no se ha eliminado del carrito");
                     }
                 }
                 this.mostrarProductos();
@@ -244,7 +247,7 @@ export class Carrito {
                     padre.remove();
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 }  else {
-                    alert(`No se ha eliminado el producto ${producto.nombre}`);
+                    this.alerta(`No se ha eliminado el producto ${producto.nombre}`);
                 }
                 this.mostrarProductos();
             });
@@ -257,10 +260,63 @@ export class Carrito {
             if (confirm("¿Estas seguro de que quieres vaciar el carrito?")) {
                 localStorage.removeItem("carrito");
             }  else {
-                alert(`No se ha vaciado el carrito`);
+                this.alerta(`No se ha vaciado el carrito`);
             }
             this.mostrarProductos();
         });
+    }
+
+    static alerta(texto, confirmacion) {
+        let div = document.createElement("div");
+        let p = document.createElement("p");
+        let modal = document.querySelector(".modal");
+        let fondoModal = document.createElement("div");
+        let alerta = document.querySelector(".alerta");
+
+        document.body.appendChild(fondoModal);
+        document.body.appendChild(div);
+        div.appendChild(p);
+        let botonAceptar = document.createElement("button");
+
+        div.classList.add(...["p-3", "bg-white", "alert", "transicionModal"]);
+        fondoModal.classList.add(...["modal-back-alert"]);
+
+        modal.style="display:none";
+
+        botonAceptar.classList.add(...["bg-success", "border", "rounded", "p-2", "text-white"]);
+        p.style="font-size:18px;";
+
+        p.textContent = texto;
+        botonAceptar.textContent = "Aceptar";
+
+        var botonCancelar = document.createElement("button");
+        div.append(botonCancelar, botonAceptar);
+        botonCancelar.classList.add(...["bg-danger", "border", "rounded", "p-2", "text-white"]);
+        botonCancelar.textContent = "Cancelar";
+
+        if(confirmacion){
+            botonCancelar.disabled = true;
+            botonCancelar.style="display:none";
+        }
+
+        botonAceptar?.addEventListener('click', (e)=>{
+            e.target.parentElement.remove();
+            modal.style="display:block";
+            document.querySelector(".modal-backdrop").style="display:block;";
+            fondoModal.remove();
+            this.mostrarProductos();
+            return true;
+        });
+
+        botonCancelar?.addEventListener('click', (e)=>{
+            e.target.parentElement.remove();
+            modal.style="display:block";
+            document.querySelector(".modal-backdrop").style="display:block;";
+            fondoModal.remove();
+            this.mostrarProductos();
+            return false;
+        });
+
     }
 
     producto;
@@ -268,6 +324,7 @@ export class Carrito {
     constructor(producto) {
         this.producto = producto;
         let carrito = JSON.parse(localStorage.getItem("carrito"));
+
         if (carrito) {
             for (let i = 0; i < carrito.length; i++) {
                 if (carrito[i].nombre == producto.nombre) {
@@ -276,7 +333,6 @@ export class Carrito {
                     break;
                 }
             }
-
             if (!validador) {
                 this.producto.cantidad = 1;
                 carrito.push(this.producto);
@@ -287,7 +343,7 @@ export class Carrito {
             let productoCarrito = carrito.splice(carritoIndex, 1)[0];
 
             if (productoCarrito.cantidad >= 10) {
-                alert("No se pueden agregar mas de 10 veces el mismo producto");
+                Carrito.alerta("No se pueden agregar más de 10 veces el mismo producto");
             } else {
                 productoCarrito.cantidad++;
                 let precioUnitario = this.producto.precio;
