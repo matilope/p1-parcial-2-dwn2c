@@ -221,11 +221,15 @@ export class Carrito{
                     carrito.push(producto);
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 } else {
-                    if (this.alerta("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?", true)) {
-                        padre.remove();
-                        localStorage.setItem("carrito", JSON.stringify(carrito));
+                    if (this.alerta("No puede tener menos de un item, ¿estas seguro de que quieres eliminarlo?", true, function(confirm){
+                        if(confirm){
+                            padre.remove();
+                            localStorage.setItem("carrito", JSON.stringify(carrito));
+                            Carrito.mostrarProductos();
+                        }
+                    })) {
                     } else {
-                        this.alerta("El producto no se ha eliminado del carrito");
+                        this.alerta("El producto no se ha eliminado del carrito", undefined);
                     }
                 }
                 this.mostrarProductos();
@@ -266,57 +270,55 @@ export class Carrito{
         });
     }
 
-    static alerta(texto, confirmacion) {
+    static alerta(texto, confirmacion, callback) {
         let div = document.createElement("div");
         let p = document.createElement("p");
-        let modal = document.querySelector(".modal");
         let fondoModal = document.createElement("div");
-        let alerta = document.querySelector(".alerta");
+        let modal = document.querySelector(".modal");
+        let alerta = document.querySelector(".alert");
 
-        document.body.appendChild(fondoModal);
-        document.body.appendChild(div);
-        div.appendChild(p);
-        let botonAceptar = document.createElement("button");
+        if(!alerta){
+            document.body.appendChild(fondoModal);
+            document.body.appendChild(div);
+            div.appendChild(p);
+            let botonAceptar = document.createElement("button");
 
-        div.classList.add(...["p-3", "bg-white", "alert", "transicionModal"]);
-        fondoModal.classList.add(...["modal-back-alert"]);
+            fondoModal.classList.add(...["modal-back-alert"]);
+            div.classList.add(...["p-3", "bg-white", "alert", "transicionModal"]);
+            
+            modal.style="display:none";
 
-        modal.style="display:none";
+            botonAceptar.classList.add(...["bg-success", "border", "rounded", "p-2", "text-white"]);
+            p.style="font-size:18px;";
 
-        botonAceptar.classList.add(...["bg-success", "border", "rounded", "p-2", "text-white"]);
-        p.style="font-size:18px;";
+            p.textContent = texto;
+            botonAceptar.textContent = "Aceptar";
 
-        p.textContent = texto;
-        botonAceptar.textContent = "Aceptar";
-
-        var botonCancelar = document.createElement("button");
-        div.append(botonCancelar, botonAceptar);
-        botonCancelar.classList.add(...["bg-danger", "border", "rounded", "p-2", "text-white"]);
-        botonCancelar.textContent = "Cancelar";
-
-        if(confirmacion){
-            botonCancelar.disabled = true;
-            botonCancelar.style="display:none";
+            if(confirmacion){
+                let botonCancelar = document.createElement("button");
+                div.append(botonCancelar, botonAceptar);
+                botonCancelar.classList.add(...["bg-danger", "border", "rounded", "p-2", "text-white"]);
+                botonCancelar.textContent = "Cancelar";
+                botonCancelar?.addEventListener('click', (e)=>{
+                    e.target.parentElement.remove();
+                    modal.style="display:block";
+                    document.querySelector(".modal-backdrop").style="display:block;";
+                    fondoModal.remove();
+                    return callback(false);
+                });
+                botonAceptar?.addEventListener('click', (e)=>{
+                    return callback(true);
+                });
+            } else {
+                div.append(botonAceptar);
+            }
+            botonAceptar?.addEventListener('click', (e)=>{
+                e.target.parentElement.remove();
+                modal.style="display:block";
+                document.querySelector(".modal-backdrop").style="display:block;";
+                fondoModal.remove();
+            });
         }
-
-        botonAceptar?.addEventListener('click', (e)=>{
-            e.target.parentElement.remove();
-            modal.style="display:block";
-            document.querySelector(".modal-backdrop").style="display:block;";
-            fondoModal.remove();
-            this.mostrarProductos();
-            return true;
-        });
-
-        botonCancelar?.addEventListener('click', (e)=>{
-            e.target.parentElement.remove();
-            modal.style="display:block";
-            document.querySelector(".modal-backdrop").style="display:block;";
-            fondoModal.remove();
-            this.mostrarProductos();
-            return false;
-        });
-
     }
 
     producto;
