@@ -190,7 +190,19 @@ function crearHtmlProductos(productos){
 
         h3.textContent = productos[i].nombre;
         p.textContent = productos[i].descripcion;
-        spanPrecio.textContent = `$${productos[i].precio}`;
+        
+        if(productos[i].precio.toString().length==6){
+            spanPrecio.textContent = `$${productos[i].precio.toString().substring(0, 3)}.${productos[i].precio.toString().substring(3, 6)}`;
+        }
+    
+        if(productos[i].precio.toString().length==5){
+            spanPrecio.textContent = `$${productos[i].precio.toString().substring(0, 2)}.${productos[i].precio.toString().substring(2, 5)}`;
+        }
+        
+        if(productos[i].precio.toString().length==4){
+            spanPrecio.textContent = `$${productos[i].precio.toString().substring(0, 1)}.${productos[i].precio.toString().substring(1, 4)}`;
+        }
+
         spanCategoria.textContent = productos[i].categoria;
         button.textContent = "Agregar al carrito";
         articles.push(article);
@@ -200,8 +212,7 @@ function crearHtmlProductos(productos){
 
 crearHtmlProductos(productos);
 
-// filtrado
-
+/* filtrado */
 let breadcrumb = document.querySelectorAll(".breadcrumb-item");
 breadcrumb.forEach((categoria)=>{
     categoria.addEventListener('click', (e)=>{
@@ -244,20 +255,15 @@ function crearModalProducto(filtrado){
     imagen.classList.add(...["card-img-top"]);
     imagen.src = filtrado.imagenes[0];
 
-    /* Para pushear los indices de las imagenes mayores a 0 */
-    var arrayI = [];
-    for (let i = 0; i < filtrado.imagenes.length; i++) {
-        arrayI.push(i);
-    }
-
-    if(arrayI.length>1){
+    if(filtrado.imagenes.length>1){
         let divImagenesPequeñas = document.createElement("div");
+        divImagenesPequeñas.classList.add("contenedor-imagenes-pequeñas");
         article.appendChild(divImagenesPequeñas);
-        arrayI.forEach(id =>{
+        filtrado.imagenes.forEach(img =>{
             let imagen = document.createElement("img");
             divImagenesPequeñas.appendChild(imagen);
             imagen.classList.add("imagenes-pequeñas");
-            imagen.src=filtrado.imagenes[id];
+            imagen.src = img;
         });
     }
     
@@ -271,12 +277,26 @@ function crearModalProducto(filtrado){
     p.classList.add(...["card-text"]);
     button.classList.add(...["btn", "btn-lg", "btn-primary"]);
     button.setAttribute("data-id", `${filtrado.id}`);
+    spanPrecio.classList.add(...["span-precio"]);
     botonCerrar.classList.add(...["btn-close", "btn-lg", "btn"]);
     modalHeader.classList.add(...["modal-header", "justify-content-end", "mb-3"]);
+    footer.classList.add(...["contenedor-boton-precio"]);
 
     h3.textContent = filtrado.nombre;
     p.textContent = filtrado.descripcion;
-    spanPrecio.textContent = filtrado.precio;
+
+    if(filtrado.precio.toString().length==6){
+        spanPrecio.textContent = `$${filtrado.precio.toString().substring(0, 3)}.${filtrado.precio.toString().substring(3, 6)}`;
+    }
+
+    if(filtrado.precio.toString().length==5){
+        spanPrecio.textContent = `$${filtrado.precio.toString().substring(0, 2)}.${filtrado.precio.toString().substring(2, 5)}`;
+    }
+
+    if(filtrado.precio.toString().length==4){
+        spanPrecio.textContent = `$${filtrado.precio.toString().substring(0, 1)}.${filtrado.precio.toString().substring(1, 4)}`;
+    }
+
     spanCategoria.textContent = filtrado.categoria;
     button.textContent = "Agregar al carrito";
 

@@ -1,25 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+/* General */
 
-/* Carrito de compras cantidad */
+html{
+    scroll-behavior: smooth;
+}
 
-.cantidad-productos{
-    position: absolute;
-    top: -30%;
-    left: 40%;
-    font-size: 2rem;
+body{
+    background-color: #eeeeee;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
-/* Items del carrito */
+/* Main section articulos de productos */
 
-.modal-content{
-    width: 600px;
-}
-
-.items{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+section article:hover{
+    box-shadow: 1px 1px 12px black;
 }
 
 article img:not(.articulo-modal img){
@@ -31,7 +27,38 @@ article img:hover:not(.articulo-modal img){
     cursor:pointer;
 }
 
-.items h4{
+section article span:last-of-type{
+    display:block;
+    text-transform: capitalize;
+}
+
+/* Carrito de compras cantidad mostrado en inicio */
+
+.cantidad-productos{
+    position: absolute;
+    top: -30%;
+    left: 40%;
+    font-size: 2rem;
+}
+
+
+/* Items del carrito */
+
+.modal-dialog{
+    max-width: 600px;
+}
+
+.modal-content{
+    width: 600px;
+}
+
+.items{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.items h5{
     width: 200px;
     text-align: center;
 }
@@ -53,6 +80,11 @@ input[type=number] {
     -moz-appearance:textfield;
     border:1px solid rgb(207, 207, 207);
     height: 30px;
+}
+
+.contenedorInput{
+    display: flex;
+    align-items: center;
 }
 
 button[data-name="decrementador"], button[data-name="incrementador"]{
@@ -142,13 +174,34 @@ button[data-name="decrementador"], button[data-name="incrementador"]{
     right: 0px;
     padding: 2rem;
     margin: 1rem auto !important;
-    width: 24rem;
+    width: 30rem;
+}
+
+.contenedor-imagenes-pequeñas{
+    padding:1rem;
 }
 
 .imagenes-pequeñas{
-    display: inline;
-    width: 20%;
+    display: inline-block;
+    width: 16%;
     cursor:pointer;
+}
+
+.articulo-modal img:not(.articulo-modal div img){
+    height: 360px;
+    object-fit: contain;
+}
+
+.contenedor-boton-precio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.span-precio{
+    font-weight: bold;
+    font-size: 26px;
+    color: #b60dfd;
 }
 
 
