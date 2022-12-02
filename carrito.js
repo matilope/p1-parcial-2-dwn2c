@@ -112,7 +112,7 @@ export class Carrito {
                 let atributoId = e.target.getAttribute("data-id");
                 let productoCarrito = new Carrito(productos[atributoId]);
                 productoCarrito.mensajeCarrito(atributoId);
-                Carrito.actualizarCantidadProductos();
+                this.actualizarCantidadProductos();
             });
         }
     }

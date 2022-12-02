@@ -215,13 +215,28 @@ crearHtmlProductos(productos);
 
 /* filtrado */
 let breadcrumb = document.querySelectorAll(".breadcrumb-item");
-breadcrumb.forEach((categoria)=>{
-    categoria.addEventListener('click', (e)=>{
+breadcrumb.forEach((categoria, index)=>{
+    categoria.addEventListener('click', ()=>{
         let filtrados = productos.filter(item => item.categoria == categoria.textContent.toLowerCase());
         let articles = crearHtmlProductos(filtrados);
         section.replaceChildren(...articles);
         cambiarImagen();
         Carrito.agregarProductos();
+        categoria.classList.add("activo");
+        switch(index){
+            case 0:
+                categoria.nextElementSibling.classList.remove("activo");
+                categoria.nextElementSibling.nextElementSibling.classList.remove("activo");
+                break;
+            case 1:
+                categoria.previousElementSibling.classList.remove("activo");
+                categoria.nextElementSibling.classList.remove("activo");
+                break;
+            case 2:
+                categoria.previousElementSibling.classList.remove("activo");
+                categoria.previousElementSibling.previousElementSibling.classList.remove("activo");
+                break;
+        }
     });
 });
 
