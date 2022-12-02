@@ -2,7 +2,7 @@ import { Carrito } from "./carrito.js";
 
 const data = [{
         nombre: "Iphone 14",
-        imagenes: ["/imagenes/iphones/iphone-14/iphone-14-azul-128gb.webp", "/imagenes/iphones/iphone-14/iphone-14-blanco-128gb.webp", "/imagenes/iphones/iphone-14/iphone-14-morado-128gb.webp"],
+        imagenes: ["imagenes/iphones/iphone-14/iphone-14-azul-128gb.webp", "imagenes/iphones/iphone-14/iphone-14-blanco-128gb.webp", "imagenes/iphones/iphone-14/iphone-14-morado-128gb.webp"],
         descripcion: "El iPhone 14 viene con el sistema de dos cámaras más impresionante en un iPhone, para que tomes fotos espectaculares con mucha o poca luz. Y te da más tranquilidad gracias a una funcionalidad de seguridad que salva vidas.",
         precio: 389499,
         categoria: "celulares",
@@ -10,7 +10,7 @@ const data = [{
     },
     {
         nombre: "Iphone 13",
-        imagenes: ["/imagenes/iphones/iphone-13/iphone-13-azul-128gb.webp", "/imagenes/iphones/iphone-13/iphone-13-blanco-128gb.webp", "/imagenes/iphones/iphone-13/iphone-13-rosa-128gb.webp"],
+        imagenes: ["imagenes/iphones/iphone-13/iphone-13-azul-128gb.webp", "imagenes/iphones/iphone-13/iphone-13-blanco-128gb.webp", "imagenes/iphones/iphone-13/iphone-13-rosa-128gb.webp"],
         descripcion: "iPhone 13. El sistema de dos cámaras más avanzado en un iPhone. El superrápido chip A15 Bionic. Un gran salto en duración de batería. Un diseño resistente. Y una pantalla Super Retina XDR más brillante.",
         precio: 339000,
         categoria: "celulares",
@@ -18,7 +18,7 @@ const data = [{
     },
     {
         nombre: "Iphone 12",
-        imagenes: ["/imagenes/iphones/iphone-12/iphone-12-azul-128gb.webp", "/imagenes/iphones/iphone-12/iphone-12-blanco-128gb.webp", "/imagenes/iphones/iphone-12/iphone-12-morado-128gb.webp"],
+        imagenes: ["imagenes/iphones/iphone-12/iphone-12-azul-128gb.webp", "imagenes/iphones/iphone-12/iphone-12-blanco-128gb.webp", "imagenes/iphones/iphone-12/iphone-12-morado-128gb.webp"],
         descripcion: "El iPhone 12 tiene una espectacular pantalla Super Retina XDR de 6.1 pulgadas. Un frente de Ceramic Shield, cuatro veces más resistente a las caídas. Potente chip A14 Bionic.",
         precio: 278999,
         categoria: "celulares",
@@ -26,7 +26,7 @@ const data = [{
     },
     {
         nombre: "Iphone 11",
-        imagenes: ["/imagenes/iphones/iphone-11/iphone-11-azul-128gb.webp", "/imagenes/iphones/iphone-11/iphone-11-blanco-128gb.webp", "/imagenes/iphones/iphone-11/iphone-11-morado-128gb.webp"],
+        imagenes: ["imagenes/iphones/iphone-11/iphone-11-azul-128gb.webp", "imagenes/iphones/iphone-11/iphone-11-blanco-128gb.webp", "imagenes/iphones/iphone-11/iphone-11-morado-128gb.webp"],
         descripcion: "Graba videos 4K y captura retratos espectaculares y paisajes increíbles con el sistema de dos cámaras. Toma grandes fotos con poca luz gracias al modo Noche. Disfruta colores reales con la pantalla Liquid Retina de 6.1 pulgadas",
         precio: 255000,
         categoria: "celulares",
@@ -34,7 +34,7 @@ const data = [{
     },
     {
         nombre: "Iphone SE",
-        imagenes: ["/imagenes/iphones/iphone-SE/iphone-se-azul-128gb.webp", "/imagenes/iphones/iphone-SE/iphone-se-blanco-128gb.webp", "/imagenes/iphones/iphone-SE/iphone-se-rojo-128gb.webp"],
+        imagenes: ["imagenes/iphones/iphone-SE/iphone-se-azul-128gb.webp", "imagenes/iphones/iphone-SE/iphone-se-blanco-128gb.webp", "imagenes/iphones/iphone-SE/iphone-se-rojo-128gb.webp"],
         descripcion: "Chip A15 Bionic superrápido. Una increíble duración de batería y una cámara que es una superestrella. Y además, el vidrio más resistente en un smartphone y botón de inicio con la seguridad de Touch ID.",
         precio: 190499,
         categoria: "celulares",
@@ -42,7 +42,7 @@ const data = [{
     },
     {
         nombre: "Iphone XR",
-        imagenes: ["/imagenes/iphones/iphone-XR/iphone-xr-negro-128gb.webp", "/imagenes/iphones/iphone-XR/iphone-xr-blanco-128gb.webp", "/imagenes/iphones/iphone-XR/iphone-xr-rojo-128gb.webp"],
+        imagenes: ["imagenes/iphones/iphone-XR/iphone-xr-negro-128gb.webp", "imagenes/iphones/iphone-XR/iphone-xr-blanco-128gb.webp", "imagenes/iphones/iphone-XR/iphone-xr-rojo-128gb.webp"],
         descripcion: "El iPhone XR viene con una pantalla Liquid Retina de 6.1 pulgadas. El avanzado sistema Face ID te permite desbloquearlo de forma segura e iniciar sesión con sólo una mirada. El chip A12 Bionic usa el aprendizaje automático en tiempo real.",
         precio: 234000,
         categoria: "celulares",
@@ -50,7 +50,7 @@ const data = [{
     },
     {
         nombre: "Airpods con cable",
-        imagenes: ["/imagenes/accesorios/accesorios-auriculares-cable.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-auriculares-cable.webp"],
         descripcion: "A diferencia de los audífonos circulares tradicionales, el diseño de los EarPods se basa en la geometría del oído, por eso son más cómodos que cualquier otro audífono de este tipo.",
         precio: 14255,
         categoria: "accesorios",
@@ -58,7 +58,7 @@ const data = [{
     },
     {
         nombre: "Airpods inalambricos",
-        imagenes: ["/imagenes/accesorios/accesorios-auriculares-inalambricos.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-auriculares-inalambricos.webp"],
         descripcion: "Los AirPods te brindan una experiencia inalámbrica inigualable con un sonido de alta calidad, acceso a Siri y un estuche de carga que te ofrece más de 24 horas de reproducción de audio",
         precio: 24131,
         categoria: "accesorios",
@@ -66,7 +66,7 @@ const data = [{
     },
     {
         nombre: "Cargador con cable",
-        imagenes: ["/imagenes/accesorios/accesorios-cargador-cable.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-cargador-cable.webp"],
         descripcion: "El adaptador de corriente USB tipo C de 20W de Apple ofrece una carga rápida y eficiente en el hogar, en la oficina o mientras viaja. El cable USB C Conecta tu iPhone, iPad o iPod al Adaptador de corriente de 20W.",
         precio: 7599,
         categoria: "accesorios",
@@ -74,7 +74,7 @@ const data = [{
     },
     {
         nombre: "Cargador inalambrico",
-        imagenes: ["/imagenes/accesorios/accesorios-cargador-inalambrico.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-cargador-inalambrico.webp"],
         descripcion: "El cargador MagSafe inalámbrico incorpora imanes perfectamente alineados para fijarse al instante a tu iPhone y cargarlo sin cables aún más rápido con hasta 15W",
         precio: 7899,
         categoria: "accesorios",
@@ -82,7 +82,7 @@ const data = [{
     },
     {
         nombre: "Usb lightning",
-        imagenes: ["/imagenes/accesorios/accesorios-usb.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-usb.webp"],
         descripcion: "Este cable USB 2.0 conecta tu iPhone, iPad o iPod con conector Lightning al puerto USB de tu computadora para sincronizarlos y cargarlos. También puedes conectar tu dispositivo al adaptador de corriente USB de Apple.",
         precio: 3491,
         categoria: "accesorios",
@@ -90,7 +90,7 @@ const data = [{
     },
     {
         nombre: "Funda blanca",
-        imagenes: ["/imagenes/accesorios/accesorios-funda-blanco.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-funda-blanco.webp"],
         descripcion: "Funda blanca de silicona, no a prueba de agua, modelos compatibles 11, 12 y 13",
         precio: 2899,
         categoria: "accesorios",
@@ -98,7 +98,7 @@ const data = [{
     },
     {
         nombre: "Funda Morada",
-        imagenes: ["/imagenes/accesorios/accesorios-funda-morado.webp"],
+        imagenes: ["imagenes/accesorios/accesorios-funda-morado.webp"],
         descripcion: "Funda morada de silicona, no a prueba de agua, modelos compatibles 11, 12 y 13",
         precio: 2899,
         categoria: "accesorios",
@@ -106,7 +106,7 @@ const data = [{
     },
     {
         nombre: "Apple watch 8",
-        imagenes: ["/imagenes/watches/watch-8-azul.webp"],
+        imagenes: ["imagenes/watches/watch-8-azul.webp"],
         descripcion: "El Apple Watch Series 8 viene con apps y sensores de salud avanzados con los que puedes hacerte un electrocardiograma, medir tu frecuencia cardiaca y nivel de oxígeno en la sangre, y registrar cambios de temperatura.",
         precio: 180999,
         categoria: "relojes",
@@ -114,7 +114,7 @@ const data = [{
     },
     {
         nombre: "Apple watch 7",
-        imagenes: ["/imagenes/watches/watch-7-blanco.webp"],
+        imagenes: ["imagenes/watches/watch-7-blanco.webp"],
         descripcion: "El Apple Watch Series 7 tiene la pantalla Retina siempre activa más grande y avanzada hasta ahora. Sus funcionalidades avanzadas te permiten medir tu nivel de oxígeno en la sangre, monitorear tus horas de sueño y practicar la conciencia plena.",
         precio: 170199,
         categoria: "relojes",
@@ -122,7 +122,7 @@ const data = [{
     },
     {
         nombre: "Apple watch 6",
-        imagenes: ["/imagenes/watches/watch-6-rojo.webp"],
+        imagenes: ["imagenes/watches/watch-6-rojo.webp"],
         descripcion: "Con el Apple Watch Series 6, puedes medir tu nivel de oxígeno en la sangre gracias a un sensor revolucionarios. Además, tienes los datos de tus entrenamientos a la vista en la mejorada pantalla Retina, que ahora es 2.5 veces más brillante.",
         precio: 125890,
         categoria: "relojes",
@@ -130,7 +130,7 @@ const data = [{
     },
     {
         nombre: "Apple watch 3",
-        imagenes: ["/imagenes/watches/watch-3-blanco.webp"],
+        imagenes: ["imagenes/watches/watch-3-blanco.webp"],
         descripcion: "Monitorea tu frecuencia cardiaca y recibe notificaciones si está demasiado baja o demasiado alta. Mide tus entrenamientos, lleva un registro de tu actividad y compártela. Además, recibe llamadas, responde mensajes.",
         precio: 75873,
         categoria: "relojes",
@@ -138,7 +138,7 @@ const data = [{
     },
     {
         nombre: "Apple watch SE",
-        imagenes: ["/imagenes/watches/watch-se-blanco.webp"],
+        imagenes: ["imagenes/watches/watch-se-blanco.webp"],
         descripcion: "Tiene las funcionalidades esenciales para ayudarte a llevar una vida más activa, saludable y conectada. El Apple Watch SE es dos veces más rápido y tiene una pantalla un 30% más grande. Y cuenta con funcionalidades de seguridad como Detección de Caídas y Emergencia SOS.",
         precio: 129999,
         categoria: "relojes",
