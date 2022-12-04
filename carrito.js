@@ -390,6 +390,10 @@ export class Carrito{
         toast.appendChild(toastHeader);
         toast.appendChild(toastBody);
 
+        button.addEventListener('click', () => {
+            document.body.removeChild(toast);
+        });
+        
         toast.style = `display: block; position: fixed; top: 0; right: 0;`;
         [img, strong, small, button].forEach((HTMLElement) => {
             toastHeader.appendChild(HTMLElement);
