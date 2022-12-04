@@ -3,9 +3,9 @@ import { productos } from './index.js';
 
 let carrito = JSON.parse(localStorage.getItem("carrito"));
 
-let inicializacion = new Carrito();
+const inicializacion = new Carrito();
 
-function agregarCarrito(){
+export function agregarCarrito(){
     let agregarCarrito = document.querySelectorAll("[data-id]");
     for (let i = 0; i < agregarCarrito.length; i++) {
         agregarCarrito[i].addEventListener('click', (e) => {
