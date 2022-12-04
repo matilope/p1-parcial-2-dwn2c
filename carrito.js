@@ -251,12 +251,11 @@ export class Carrito{
                     carrito.push(producto);
                     localStorage.setItem("carrito", JSON.stringify(carrito));
                 } else {
-                    const thisCarrito = this;
-                    if (this.alerta("No puede tener menos de un item,<br /> ¿Estas seguro de que quieres eliminarlo?", true, function(confirm){
+                    if (this.alerta("No puede tener menos de un item,<br /> ¿Estas seguro de que quieres eliminarlo?", true, (confirm) => {
                         if(confirm){
                             padre.remove();
                             localStorage.setItem("carrito", JSON.stringify(carrito));
-                            thisCarrito.mostrarProductos();
+                            this.mostrarProductos();
                         }
                     })) {
                     } else {
@@ -278,12 +277,11 @@ export class Carrito{
                 let filtrado = carrito.filter(item => item.id == id)[0];
                 let indexCarrito = carrito.indexOf(filtrado);
                 let producto = carrito.splice(indexCarrito, 1)[0];
-                const thisCarrito = this;
-                if (this.alerta("¿Estas seguro de que quieres eliminarlo?", true, function(confirm){
+                if (this.alerta("¿Estas seguro de que quieres eliminarlo?", true, (confirm) => {
                     if(confirm){
                         padre.remove();
                         localStorage.setItem("carrito", JSON.stringify(carrito));
-                        thisCarrito.mostrarProductos();
+                        this.mostrarProductos();
                     }
                 })) {
                 } else {
@@ -297,11 +295,10 @@ export class Carrito{
     vaciarCarrito() {
         let vaciar = document.querySelector(".btn-danger");
         vaciar?.addEventListener('click', () => {
-            const thisCarrito = this;
-            if (this.alerta("¿Estas seguro de que quieres vaciar el carrito?", true, function(confirm){
+            if (this.alerta("¿Estas seguro de que quieres vaciar el carrito?", true, (confirm) => {
                 if(confirm){
                     localStorage.removeItem("carrito");
-                    thisCarrito.mostrarProductos();
+                    this.mostrarProductos();
                 }
             })) {
             } else {
