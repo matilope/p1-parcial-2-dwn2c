@@ -403,8 +403,4 @@ export class Carrito{
         }, 2000);
     }
 
-    continuarCheckout(){
-        
-    }
-
 }
