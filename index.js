@@ -1,4 +1,4 @@
-import { Carrito } from "./carrito.js";
+import { agregarProductos } from "./carrito.js";
 
 const data = [{
         nombre: "Iphone 14",
@@ -221,7 +221,7 @@ breadcrumb.forEach((categoria, index)=>{
         let articles = crearHtmlProductos(filtrados);
         section.replaceChildren(...articles);
         cambiarImagen();
-        Carrito.agregarProductos();
+        agregarProductos();
         categoria.classList.add("activo");
         switch(index){
             case 0:
