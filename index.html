@@ -61,39 +61,6 @@
   <script type="module" src="carrito.js"></script>
   <script type="module" src="elementos.js"></script>
   <script type="module" src="index.js"></script>
-  <script>
-    Date.prototype.obtenerFecha = function () {
-      let days = [
-        "Domingo",
-        "Lunes",
-        "Martes",
-        "Miercoles",
-        "Jueves",
-        "Viernes",
-        "Sabado",
-      ];
-      let months = [
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre",
-      ];
-
-      return `
-        ${this.getDate()}
-        ${days[this.getDay()]}
-        ${months[this.getMonth()]}
-        `;
-    };
-  </script>
 
 </body>
 

@@ -334,7 +334,7 @@ articles.forEach(article =>{
         let filtrado = productos.filter(item => item.id == id)[0];
         crearModalProducto(filtrado);
         cambiarImagen();
-        Carrito.agregarProductos();
+        agregarProductos();
     });
 });
 
